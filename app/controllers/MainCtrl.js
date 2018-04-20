@@ -19,23 +19,74 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     var firestore = firebase.firestore();
     const $idInput = $("#id");
 
-    const docRef = firestore.doc("recenseurs/" + $idInput.val());
+    const colRef = firestore.collection("agents");
     const $nomInput = $("#nom");
     const $prenomInput = $("#prenom");
+    const $departement = $("#departement");
+    const $errorMessage = $("#error-message");
+    const $agentTableRow = $("#agent-table tbody tr:last");
+
 
 
     //
     $scope.myClick = function () {
 
+        var id = $idInput.val();
+        if (id == "") {
+            $errorMessage.text("An ID is requierd");
+            return;
+        }
+
+        var docRef = colRef.doc(id);
+
         docRef.set({
             Nom: $nomInput.val(),
             Prenom: $prenomInput.val(),
-            Departement: ""
+            Departement: $departement.dropdown('get value')
         }).then(function () {
-            console.log("Status saved")
+            console.log("Status saved");
+            $idInput.val("");
+            $nomInput.val("");
+            $prenomInput.val("");
+            $departement.val("");
+            $errorMessage.hide();
         }).catch(function (error) {
-            console.log("Got an error: ", error)
+            console.log("Got an error: ", error);
+            $errorMessage.text("Got an error: " + error);
+            $errorMessage.show();
         });
-
     }
+
+    $scope.onCollectAgents = function () {
+
+
+
+        colRef.get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (doc && doc.exists) {
+                        var data = doc.data();
+                        var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
+
+                        $agentTableRow.after('<tr>' + row + '</tr>');
+                    }
+                });
+            })
+            .catch(function (error) {
+                console.log("Error getting documents: ", error);
+            });
+    }
+
+
+    getRealTimeUpdates = function () {
+        colRef.onSnapshot(function (doc) {
+            if (doc && doc.exists) {
+                var data = doc.data();
+                var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
+                $agentTableRow.after('<tr>' + row + '</tr>');
+            }
+        });
+    }
+
+    getRealTimeUpdates();
+
 });

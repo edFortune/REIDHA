@@ -41,39 +41,114 @@
             </div>
             <div class="field">
                 <label>Departement</label>
-                <div class="ui selection dropdown">
-                    <input type="hidden" name="gender">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Departement</div>
-                    <select name="departement" class="ui dropdown" id="select">
-                        <option value="">Departement</option>
-                        <option value="Artibonite">Artibonite</option>
-                        <option value="Centre">Centre</option>
-                        <option value="Grand'Anse">Grand'Anse</option>
-                        <option value="Nippes">Nippes</option>
-                        <option value="Nord">Nord</option>
-                        <option value="Nord-Est">Nord-Est</option>
-                        <option value="Nord-Ouest">Nord-Ouest</option>
-                        <option value="Ouest">Ouest</option>
-                        <option value="Sud-Est">Sud-Est</option>
-                        <option value="Sud">Sud</option>
-                    </select>
-                </div>
+                <select name="departement" class="ui dropdown" id="departement">
+                    <option value="">Departement</option>
+                    <option value="Artibonite">Artibonite</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Grand'Anse">Grand'Anse</option>
+                    <option value="Nippes">Nippes</option>
+                    <option value="Nord">Nord</option>
+                    <option value="Nord-Est">Nord-Est</option>
+                    <option value="Nord-Ouest">Nord-Ouest</option>
+                    <option value="Ouest">Ouest</option>
+                    <option value="Sud-Est">Sud-Est</option>
+                    <option value="Sud">Sud</option>
+                </select>
+
 
             </div>
 
             <button id="enregistrer" class="ui button" data-ng-click="myClick()">Enregistrer</button>
 
         </form>
-
+        <div id="error-message" class="ui red message" style="display: none"></div>
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="second">
 
+        <table id="agent-table" class="ui celled table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Departement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+
+            </tbody>
+            <!-- <tfoot>
+                <tr>
+                    <th colspan="4">
+                        <div class="ui right floated pagination menu">
+                            <a class="icon item">
+                                <i class="left chevron icon"></i>
+                            </a>
+                            <a class="item">1</a>
+                            <a class="item">2</a>
+                            <a class="item">3</a>
+                            <a class="icon item">
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot> -->
+        </table>
+        <button id="collecter" class="ui button" data-ng-click="onCollectAgents()">Collecter</button>
     </div>
 
     <div class="ui bottom attached tab segment" data-tab="third">
-
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Header</th>
+                    <th>Header</th>
+                    <th>Header</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="ui ribbon label">First</div>
+                    </td>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">
+                        <div class="ui right floated pagination menu">
+                            <a class="icon item">
+                                <i class="left chevron icon"></i>
+                            </a>
+                            <a class="item">1</a>
+                            <a class="item">2</a>
+                            <a class="item">3</a>
+                            <a class="item">4</a>
+                            <a class="icon item">
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 
 
