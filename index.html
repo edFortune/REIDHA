@@ -3,40 +3,41 @@
 <head>
     <title>Admin Panel</title>
     <link rel="stylesheet" href="./assets/lib/semantic/semantic.min.css">
+
 </head>
 
 <body data-ng-controller="MainCtrl">
-    <div class="ui secondary pointing menu">
-        <a class="active item">
+    <div class="ui secondary pointing top attached tabular menu">
+        <a class="active item" data-tab="first">
             Ajouter un agent
         </a>
-        <a class="item">
+        <a class="item" data-tab="second">
             Liste des agents
         </a>
-        <a class="item">
+        <a class="item" data-tab="third">
             Liste des abitants
         </a>
 
-        <div class="right menu">
+        <!-- <div class="right menu" data-tab="first">
             <a class="ui item">
                 Deconnexion
             </a>
-        </div>
+        </div> -->
     </div>
-    <div class="ui segment">
+    <div class="ui bottom attached tab segment active" data-tab="first">
 
         <form class="ui form">
             <div class="field">
                 <label>ID</label>
-                <input type="text" name="first-name" placeholder="ID">
+                <input id="id" type="text" name="first-name" placeholder="ID">
             </div>
             <div class="field">
                 <label>Nom</label>
-                <input type="text" name="last-name" placeholder="Last Name">
+                <input id="nom" type="text" name="last-name" placeholder="Last Name">
             </div>
             <div class="field">
                 <label>Prénom</label>
-                <input type="text" name="last-name" placeholder="Last Name">
+                <input id="prenom" type="text" name="last-name" placeholder="Last Name">
             </div>
             <div class="field">
                 <label>Departement</label>
@@ -44,18 +45,34 @@
                     <input type="hidden" name="gender">
                     <i class="dropdown icon"></i>
                     <div class="default text">Departement</div>
-                    <div class="menu">
-                        <div class="item" data-value="1">x</div>
-                        <div class="item" data-value="0">y</div>
-                    </div>
+                    <select name="departement" class="ui dropdown" id="select">
+                        <option value="">Departement</option>
+                        <option value="Artibonite">Artibonite</option>
+                        <option value="Centre">Centre</option>
+                        <option value="Grand'Anse">Grand'Anse</option>
+                        <option value="Nippes">Nippes</option>
+                        <option value="Nord">Nord</option>
+                        <option value="Nord-Est">Nord-Est</option>
+                        <option value="Nord-Ouest">Nord-Ouest</option>
+                        <option value="Ouest">Ouest</option>
+                        <option value="Sud-Est">Sud-Est</option>
+                        <option value="Sud">Sud</option>
+                    </select>
                 </div>
 
             </div>
 
-            <button class="ui button" ng-click="myClick()">Enregistrer</button>
+            <button id="enregistrer" class="ui button" data-ng-click="myClick()">Enregistrer</button>
 
         </form>
 
+    </div>
+
+    <div class="ui bottom attached tab segment" data-tab="second">
+
+    </div>
+
+    <div class="ui bottom attached tab segment" data-tab="third">
 
     </div>
 
@@ -65,6 +82,9 @@
 
 
 
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
