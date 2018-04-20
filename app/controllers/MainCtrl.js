@@ -62,6 +62,7 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
 
 
         colRef.get().then(function (querySnapshot) {
+
                 querySnapshot.forEach(function (doc) {
                     if (doc && doc.exists) {
                         var data = doc.data();
