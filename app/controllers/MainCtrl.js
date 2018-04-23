@@ -24,7 +24,7 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     const $prenomInput = $("#prenom");
     const $departement = $("#departement");
     const $errorMessage = $("#error-message");
-    const $agentTableRow = $("#agent-table tbody tr:last");
+    const $agentTableRow = $("#agent-table tbody");
 
 
 
@@ -58,17 +58,15 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     }
 
     $scope.onCollectAgents = function () {
-
-
+        $agentTableRow.empty();
 
         colRef.get().then(function (querySnapshot) {
-
                 querySnapshot.forEach(function (doc) {
                     if (doc && doc.exists) {
                         var data = doc.data();
                         var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
 
-                        $agentTableRow.after('<tr>' + row + '</tr>');
+                        $agentTableRow.append('<tr>' + row + '</tr>');
                     }
                 });
             })
@@ -79,12 +77,20 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
 
 
     getRealTimeUpdates = function () {
-        colRef.onSnapshot(function (doc) {
-            if (doc && doc.exists) {
-                var data = doc.data();
-                var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
-                $agentTableRow.after('<tr>' + row + '</tr>');
-            }
+        $agentTableRow.empty();
+
+        colRef.onSnapshot(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                if (doc && doc.exists) {
+                    var data = doc.data();
+                    var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
+
+                    $agentTableRow.append('<tr>' + row + '</tr>');
+                    console.log();
+                }
+
+            });
+
         });
     }
 
