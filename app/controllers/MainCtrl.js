@@ -25,6 +25,11 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     const $departement = $("#departement");
     const $errorMessage = $("#error-message");
     const $agentTableRow = $("#agent-table tbody");
+    const $deleteBtn = `<td class="collapsing">
+                            <button class="circular small ui icon button">
+                                <i class="icon delete"></i>
+                            </button>
+                        </td>`;
 
 
 
@@ -64,7 +69,7 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
                 querySnapshot.forEach(function (doc) {
                     if (doc && doc.exists) {
                         var data = doc.data();
-                        var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
+                        var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>" + $deleteBtn;
 
                         $agentTableRow.append('<tr>' + row + '</tr>');
                     }
@@ -83,7 +88,7 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
             querySnapshot.forEach(function (doc) {
                 if (doc && doc.exists) {
                     var data = doc.data();
-                    var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>";
+                    var row = "<td>" + doc.id + "</td>" + "<td>" + data.Nom + "</td>" + "<td>" + data.Prenom + "</td>" + "<td>" + data.Departement + "</td>" + $deleteBtn;
 
                     $agentTableRow.append('<tr>' + row + '</tr>');
                     console.log();
