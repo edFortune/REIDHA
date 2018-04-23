@@ -3,6 +3,24 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     //
     $('.ui.dropdown').dropdown();
     $('.menu .item').tab();
+    //
+
+    const $idInput = $("#id");
+    const $nomInput = $("#nom");
+    const $prenomInput = $("#prenom");
+    const $departement = $("#departement");
+    const $errorMessage = $("#error-message");
+    const $agentTableRow = $("#agent-table tbody");
+    const $userEmail = $("#email");
+    const $userPass = $("#password");
+
+    const $deleteBtn = `<td class="collapsing">
+                            <button class="circular small ui icon button delete-row">
+                                <i class="icon delete"></i>
+                            </button>
+                        </td>`;
+
+
 
     // Initialize Firebase
     var config = {
@@ -17,20 +35,7 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     firebase.initializeApp(config);
 
     var firestore = firebase.firestore();
-    const $idInput = $("#id");
-
     const colRef = firestore.collection("agents");
-    const $nomInput = $("#nom");
-    const $prenomInput = $("#prenom");
-    const $departement = $("#departement");
-    const $errorMessage = $("#error-message");
-    const $agentTableRow = $("#agent-table tbody");
-    const $deleteBtn = `<td class="collapsing">
-                            <button class="circular small ui icon button">
-                                <i class="icon delete"></i>
-                            </button>
-                        </td>`;
-
 
 
     //
@@ -41,6 +46,20 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
             $errorMessage.text("An ID is requierd");
             return;
         }
+
+        firebase.auth().createUserWithEmailAndPassword($userEmail.val(), $userPass.val()).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+
+            console.log(errorCode);
+            console.log(errorMessage);
+
+            if (errorCode || errorMessage)
+                return;
+        });
+        $userEmail.val("");
+        $userPass.val("");
 
         var docRef = colRef.doc(id);
 
@@ -100,5 +119,11 @@ mainApp.controller('MainCtrl', function MainCtrl($scope) {
     }
 
     getRealTimeUpdates();
+
+    $(document).ready(function () {
+        $('.delete-row').on("click", function () {
+            alert("HEY");
+        });
+    });
 
 });
